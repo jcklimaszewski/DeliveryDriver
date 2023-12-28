@@ -5,12 +5,23 @@ using UnityEngine;
 public class Driver : MonoBehaviour
 {
     //SerializeField allows us to access variable in Unity
-    [SerializeField] float moveSpeed = 12f;
+    [SerializeField] float moveSpeed = 15f;
     [SerializeField] float steerSpeed = 200f;
+    [SerializeField] float boostSpeed = 30f;
+    [SerializeField] float slowSpeed = 10f;
 
-    void Start()
+    private void OnTriggerEnter2D(Collider2D other) 
     {
-
+        if (other.tag == "Speed Boost")
+        {
+            moveSpeed = boostSpeed;
+            Debug.Log("Boosting...");
+        }
+        if (other.tag == "Speed Bump")
+        {
+            moveSpeed = slowSpeed;
+            Debug.Log("Road hazard!");
+        }
     }
 
     void Update()
